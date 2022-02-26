@@ -1,8 +1,9 @@
 import {configureStore} from '@reduxjs/toolkit';
+import calculatorReducer from '../store/reducers/CalculatorSlice';
 
 export const store = configureStore({
     reducer: {
-        // calculator:
+        calculator: calculatorReducer
     }
 })
 

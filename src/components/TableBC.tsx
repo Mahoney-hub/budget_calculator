@@ -11,7 +11,9 @@ export const TableBC = () => {
             </div>
             <div className="budget__col">
                 <h2 className="title title--expenses">Расходы</h2>
-                <ul id="expenses__list" className="budget-list"></ul>
+                <ul id="expenses__list" className="budget-list">
+
+                </ul>
             </div>
         </section>
     );
