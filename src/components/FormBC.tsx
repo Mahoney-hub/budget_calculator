@@ -1,11 +1,12 @@
 import React, {ChangeEvent, MouseEvent, useState} from 'react';
 import icon from '../img/check-square.svg';
 import {useAppDispatch, useAppSelector} from '../hooks/redux';
+import {ActionType, addItem} from '../store/reducers/CalculatorSlice';
 // import {addSum, changeType} from '../store/reducers/CalculatorSlice';
 
 export const FormBC = () => {
-    // const {type} = useAppSelector(state => state.calculator)
     // BLL
+    const [type, setType] = useState<ActionType>('inc')
     const [description, setDescription] = useState<string>('')
     const [value, setValue] = useState<string>('')
     const dispatch = useAppDispatch()
@@ -17,13 +18,13 @@ export const FormBC = () => {
         setValue(e.currentTarget.value)
     }
     const changeSelectHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-        const type = e.currentTarget.value
-        // if ((type) === 'exp' || (type) === 'inc') dispatch(changeType({type}))
+        const value = e.currentTarget.value
+        setType((value === 'exp') ? 'exp' : 'inc')
     }
     const clickHandler = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         const sum = +value
-        // dispatch(addSum({type, description, sum}))
+        dispatch(addItem({type, description, sum}))
         setValue('')
         setDescription('')
     }
@@ -33,7 +34,7 @@ export const FormBC = () => {
                 <select
                     className="form__input form__select"
                     name="action"
-                    // value={type}
+                    value={type}
                     onChange={changeSelectHandler}
                 >
                     <option value="inc">+</option>

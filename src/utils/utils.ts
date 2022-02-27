@@ -1,4 +1,4 @@
-import {CalculatorType} from '../store/reducers/CalculatorSlice';
+import {ActionType, CalculatorType} from '../store/reducers/CalculatorSlice';
 
 export const formatNumber = (arr: CalculatorType[]) => {
     const num = arr.reduce((a, b) => a + b.sum, 0)
@@ -13,13 +13,14 @@ export const formatNumber = (arr: CalculatorType[]) => {
     return resultNumber;
 }
 
-export const getSum = (arr: CalculatorType[], type: string) => {
-    const num = arr
+export const getSum = (arr: CalculatorType[], type: ActionType) => {
+    let num = arr
         .filter(item => item.type === type)
         .reduce((a, b) => a + b.sum, 0);
-    let int, dec;
-    [int, dec] = Math.abs(num).toFixed(2).split('.');
-    return int + '.' + dec + ' \u20BD';
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '.00'
+    // let int, dec;
+    // [int, dec] = Math.abs(num).toFixed(2).split('.');
+    // return int + '.' + dec + ' \u20BD';
 }
 
 export const displayMonth = () => {
@@ -42,9 +43,23 @@ export const displayMonth = () => {
 }
 
 export const getDifference = (arr: CalculatorType[]) => {
-    const difference = arr.reduce((a, b) => a + b.sum, 0)
-    // const sumExp = exp.reduce((a, b) => a + b.sum, 0)
-    // const difference = sumInc - sumExp
-    if (difference === 0) return 0
-    return (difference > 0) ? `+ ${difference}` : difference
+    const sumInc = arr.filter(item => item.type === 'inc').reduce((a, b) => a + b.sum, 0)
+    const sumExp = arr.filter(item => item.type === 'exp').reduce((a, b) => a + b.sum, 0)
+    const budget = sumInc - sumExp
+    if (budget === 0) return 0
+    return (budget > 0) ? `+ ${budget}` : budget
+}
+
+export const getPercent = (arr: CalculatorType[]) => {
+    // Посчитать все Доходы
+    const sumInc = arr.filter(item => item.type === 'inc').reduce((a, b) => a + b.sum, 0)
+
+    // Посчитать все Расходы
+    const sumExp = arr.filter(item => item.type === 'exp').reduce((a, b) => a + b.sum, 0)
+
+    // Посчитать общий Бюджет
+    const budget = sumInc - sumExp
+
+    // Посчитать % для расходов
+    return (budget > 0) ? Math.round((sumInc / sumExp) * 100) : -1
 }

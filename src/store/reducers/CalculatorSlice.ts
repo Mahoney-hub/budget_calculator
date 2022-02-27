@@ -1,13 +1,10 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {v1} from 'uuid';
 
-type ChangeType = {
-    type: 'exp' | 'inc'
-}
+export type ActionType = 'exp' | 'inc'
 
 type AddItemType = {
-    id: string
-    type: 'exp' | 'inc'
+    type: ActionType
     description: string
     sum: number
 }
@@ -20,7 +17,7 @@ export type CalculatorType = {
     id: string
     description: string
     sum: number
-    type: 'exp' | 'inc'
+    type: ActionType
 }
 
 export type CalculatorSliceType = {
@@ -28,10 +25,7 @@ export type CalculatorSliceType = {
 }
 
 const initialState: CalculatorSliceType = {
-    operations: [
-        {id: v1(), type: 'exp', description: 'asdf', sum: 234324},
-        {id: v1(), type: 'inc', description: 'asdf', sum: 234324},
-    ]
+    operations: []
 }
 
 export const calculatorSlice = createSlice({
@@ -41,11 +35,11 @@ export const calculatorSlice = createSlice({
         addItem(state, action: PayloadAction<AddItemType>) {
             const description = action.payload.description
             const sum = action.payload.sum
-            if (action.payload.type === 'inc') state.operations.push({id: v1(), type: 'inc', description, sum})
-            if (action.payload.type === 'exp') state.operations.push({id: v1(), type: 'exp', description, sum})
+            const type = action.payload.type
+            state.operations.push({id: v1(), type, description, sum})
         },
         removeItem(state, action: PayloadAction<RemoveItemType>) {
-
+            state.operations = state.operations.filter(item => item.id !== action.payload.id)
         }
     }
 })
