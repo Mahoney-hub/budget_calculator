@@ -13,6 +13,15 @@ export const formatNumber = (arr: CalculatorType[]) => {
     return resultNumber;
 }
 
+export const getSum = (arr: CalculatorType[], type: string) => {
+    const num = arr
+        .filter(item => item.type === type)
+        .reduce((a, b) => a + b.sum, 0);
+    let int, dec;
+    [int, dec] = Math.abs(num).toFixed(2).split('.');
+    return int + '.' + dec + ' \u20BD';
+}
+
 export const displayMonth = () => {
     let now, year, month, monthArr;
 
@@ -32,10 +41,10 @@ export const displayMonth = () => {
     return {year, month}
 }
 
-export const getDifference = (inc: CalculatorType[], exp: CalculatorType[]) => {
-    const sumInc = inc.reduce((a, b) => a + b.sum, 0)
-    const sumExp = inc.reduce((a, b) => a + b.sum, 0)
-    const difference = sumInc - sumExp
+export const getDifference = (arr: CalculatorType[]) => {
+    const difference = arr.reduce((a, b) => a + b.sum, 0)
+    // const sumExp = exp.reduce((a, b) => a + b.sum, 0)
+    // const difference = sumInc - sumExp
     if (difference === 0) return 0
-    return (difference > 0) ? `+ ${difference}` : `- ${difference}`
+    return (difference > 0) ? `+ ${difference}` : difference
 }

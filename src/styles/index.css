@@ -237,14 +237,17 @@ body {
     font-size: 18px;
     line-height: 1.5;
     text-align: center;
-    color: #23a868;
     transition: transform 0.2s;
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
 
-.item--expense .item__amount {
+.color-inc {
+    color: #23a868;
+}
+
+.color-exp {
     color: #dd5151;
 }
 
