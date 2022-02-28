@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/budget_calculator/static/css/main.aefdfa7f.css",
+    "main.js": "/budget_calculator/static/js/main.5b1dd7be.js",
+    "static/media/bg.jpg": "/budget_calculator/static/media/bg.ae4c4277c2d28eb62ed0.jpg",
+    "static/media/circle-green.svg": "/budget_calculator/static/media/circle-green.47470d2d283b5b3c64e4db29bbfb11d3.svg",
+    "static/media/circle-red.svg": "/budget_calculator/static/media/circle-red.92961c08bd3ad6dfe006ed59cbe82c29.svg",
+    "index.html": "/budget_calculator/index.html",
+    "static/media/check-square.svg": "/budget_calculator/static/media/check-square.a518ccbfda9d60a93f3f64aad16a5d64.svg",
+    "main.aefdfa7f.css.map": "/budget_calculator/static/css/main.aefdfa7f.css.map",
+    "main.5b1dd7be.js.map": "/budget_calculator/static/js/main.5b1dd7be.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.aefdfa7f.css",
+    "static/js/main.5b1dd7be.js"
+  ]
+}
